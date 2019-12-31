@@ -1,0 +1,33 @@
+{
+  "name": "stopmotion-animator",
+  "author": "miyanaga <miyanaga@ideamans.com>",
+  "version": "0.1.0",
+  "main": "dist/index.js",
+  "description": "Simple animation encoder from sequential images to short gif or mp4 with ffmpeg.",
+  "homepage": "https://www.ideamans.com/",
+  "scripts": {
+    "test": "ava-ts -v test/**/test-*.ts",
+    "watch": "ava-ts -vw test/**/test-*.ts",
+    "build": "tsc",
+    "prepublishOnly": "npm run build"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "@types/execa": "^2.0.0",
+    "@types/file-type": "^10.9.1",
+    "@types/fs-extra": "^8.0.1",
+    "@types/node": "^12.12.16",
+    "ava": "^2.4.0",
+    "ava-ts": "^0.25.2",
+    "file-type": "^12.4.2",
+    "fs-extra": "^8.1.0",
+    "gify-parse": "^1.0.7",
+    "ts-node": "^8.5.4",
+    "typescript": "^3.7.3"
+  },
+  "dependencies": {
+    "execa": "^4.0.0",
+    "glob-promise": "^3.4.0",
+    "tmp-promise": "^2.0.2"
+  }
+}
