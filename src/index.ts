@@ -53,6 +53,7 @@ export class Animator {
     const pattern = Path.join(tmp.path, `frame-%0${this.frameDigits}d.${this.inputFormat}`)
     const options = [
       '-f', 'lavfi', '-i', `color=${backgroundColor}`,
+      '-r', this.fps.toString(),
       '-i', pattern,
       '-filter_complex', '[0][1]scale2ref[bg][gif];[bg]setsar=1[bg];[bg][gif]overlay=shortest=1'
     ]
