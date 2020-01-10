@@ -82,3 +82,5 @@ typings/
 .dynamodb/
 
 test/preview
+
+dist

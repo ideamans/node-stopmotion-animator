@@ -2,6 +2,8 @@ import TmpPromise from 'tmp-promise'
 import Path from 'path'
 import Execa from 'execa'
 
+export * from './filmstrip'
+
 export type InputFormat = 'jpg'|'png'
 export type OutputFormat = 'gif'|'mp4'
 
@@ -9,7 +11,7 @@ export class Animator {
   frames = 1
   useBundle = false
   ffmpegPath: string = 'ffmpeg'
-  fps: number = 30
+  fps: number = 8
   inputFormat: InputFormat = 'jpg'
   outputFormat: OutputFormat = 'mp4'
   frameDigits = 3
@@ -84,3 +86,4 @@ export class Animator {
     if (this.tmp) await this.tmp.cleanup()
   }
 }
+
