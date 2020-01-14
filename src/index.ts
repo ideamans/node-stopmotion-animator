@@ -9,7 +9,6 @@ export type OutputFormat = 'gif'|'mp4'
 
 export class Animator {
   frames = 1
-  useBundle = false
   ffmpegPath: string = 'ffmpeg'
   fps: number = 8
   inputFormat: InputFormat = 'jpg'
@@ -66,7 +65,7 @@ export class Animator {
 
     options.push('-f', this.outputFormat, this.output)
 
-    const ffmpeg = this.useBundle ? Path.join(__dirname, '..', 'bin/ffmpeg') : this.ffmpegPath
+    const ffmpeg = this.ffmpegPath
     await Execa(ffmpeg, options, { timeout: this.timeout })
 
     return this.output
