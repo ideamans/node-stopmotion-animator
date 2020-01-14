@@ -138,3 +138,41 @@ test('mp4 slow fps', async t => {
   if (detectedType) t.is(detectedType.mime, 'video/mp4')
 })
 
+test('apng', async t => {
+  const animator = await Animator.start({ frames: 20, fps: 20, inputFormat: 'png', outputFormat: 'apng' })
+
+  await Promise.all(t.context.indexes.map(i => {
+    return Fsx.copyFile(t.context.sources[i], animator.placeholders[i])
+  }))
+
+  const previewPath = Path.join(__dirname, 'preview', 'bounce-ball.apng')
+  await animator.withResult(async outputPath => {
+    return Fsx.copyFile(outputPath, previewPath)
+  })
+
+  const buffer = await Fsx.readFile(previewPath)
+  const detectedType = FileType(buffer)
+
+  t.not(detectedType, undefined)
+  if (detectedType) t.is(detectedType.mime, 'image/apng')
+})
+
+test('apng-transparent', async t => {
+  const animator = await Animator.start({ frames: 20, fps: 20, inputFormat: 'png', outputFormat: 'apng', backgroundColor: '#ffffffff' })
+
+  await Promise.all(t.context.indexes.map(i => {
+    return Fsx.copyFile(t.context.sources[i], animator.placeholders[i])
+  }))
+
+  const previewPath = Path.join(__dirname, 'preview', 'bounce-ball-transparent.apng')
+  await animator.withResult(async outputPath => {
+    return Fsx.copyFile(outputPath, previewPath)
+  })
+
+  const buffer = await Fsx.readFile(previewPath)
+  const detectedType = FileType(buffer)
+
+  t.not(detectedType, undefined)
+  if (detectedType) t.is(detectedType.mime, 'image/apng')
+})
+

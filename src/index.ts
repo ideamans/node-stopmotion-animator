@@ -5,7 +5,7 @@ import Execa from 'execa'
 export * from './filmstrip'
 
 export type InputFormat = 'jpg'|'png'
-export type OutputFormat = 'gif'|'mp4'
+export type OutputFormat = 'gif'|'mp4'|'apng'
 
 export class Animator {
   frames = 1
@@ -61,6 +61,8 @@ export class Animator {
       //
     } else if (this.outputFormat == 'mp4') {
       options.push('-pix_fmt', 'yuv420p')
+    } else if (this.outputFormat == 'apng') {
+      options.push('-plays', '0')
     }
 
     options.push('-f', this.outputFormat, this.output)
