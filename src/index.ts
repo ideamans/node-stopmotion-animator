@@ -17,12 +17,19 @@ export class Animator {
   backgroundColor = 'white'
   timeout = 30 * 1000
 
+  tmpTemplate?: string
   tmp?: TmpPromise.DirectoryResult
   placeholders: string[] = []
   output: string = ''
 
   constructor(values: Partial<Animator> = {}) {
     Object.assign(this, values)
+  }
+
+  tmpOptions() {
+    const options: any = { unsafeCleanup: true }
+    if (this.tmpTemplate) options.template = this.tmpTemplate
+    return options
   }
 
   static async start(values: Partial<Animator> = {}) {
@@ -32,7 +39,7 @@ export class Animator {
   }
 
   async start(): Promise<string[]> {
-    const tmp = this.tmp = await TmpPromise.dir({ unsafeCleanup: true })
+    const tmp = this.tmp = await TmpPromise.dir(this.tmpOptions())
 
     this.placeholders = [...Array(this.frames).keys()].map(i => {
       const digits = i.toString().padStart(this.frameDigits, '0')
@@ -44,7 +51,7 @@ export class Animator {
   }
 
   async render(): Promise<string> {
-    const tmp = this.tmp = this.tmp || await TmpPromise.dir()
+    const tmp = this.tmp = this.tmp || await TmpPromise.dir(this.tmpOptions())
     this.output = Path.join(tmp.path, `animation.${this.outputFormat}`)
 
     let backgroundColor = this.backgroundColor.replace(/^#+/, '')
