@@ -1,7 +1,7 @@
 {
   "name": "stopmotion-animator",
   "author": "miyanaga <miyanaga@ideamans.com>",
-  "version": "0.3.2",
+  "version": "0.3.3",
   "main": "dist/index.js",
   "description": "Simple animation encoder from sequential images to short gif or mp4 with ffmpeg.",
   "homepage": "https://www.ideamans.com/",
